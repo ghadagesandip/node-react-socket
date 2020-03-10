@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { loadMessages } from './../store/actions';
 import { bindActionCreators } from 'redux';
 import ChatMessage from './../components/ChatMessage';
+import NewMessage from './../components/NewMessage';
 
 function mapStateToProps(state) {
     return {
@@ -37,6 +38,7 @@ class MessageList extends Component {
         return (
             <div>
                <div> {messageItems} </div>
+                <NewMessage />
             </div>
         );
     }
