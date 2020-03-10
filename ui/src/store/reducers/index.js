@@ -4,12 +4,13 @@ const intialState = {
 
 function rootReducer(state = intialState, action) {
 
-    if(action.type === 'MESSAGES_FETCH_SUCCEEDED') {
-        return Object.assign({}, state, {
-            messages: action.payload
-        })
+    switch(action.type) {
+        case 'MESSAGES_FETCH_SUCCEEDED':
+            return Object.assign({}, state, {
+                messages: action.payload
+            })
+        default :
+            return state;
     }
-    return state;
 }
-
 export default rootReducer;

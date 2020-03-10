@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadMessages } from './../store/actions';
+import { bindActionCreators } from 'redux';
 
 function mapStateToProps(state) {
     return {
@@ -9,19 +10,23 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        loadMessages: dispatch(loadMessages())
-    };
+    return bindActionCreators({
+        loadMessages:loadMessages
+    }, dispatch)
 }
 
 class MessageList extends Component {
 
-    componentDidMount() {
-        //this.loadMessages();
+    constructor(props) {
+        super(props);
     }
 
+    componentDidMount() {
+        this.props.loadMessages()
+    }
+   
     render() {
-        console.log('this.state.messages', this.props.messages)
+        
         const messageItems = this.props.messages 
         ? this.props.messages.map((message) => <li key={message.message}>{message.user} : {message.message}</li>) 
         : <li> No messages</li>;
