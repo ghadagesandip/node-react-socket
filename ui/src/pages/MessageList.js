@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadMessages } from './../store/actions';
 import { bindActionCreators } from 'redux';
+import ChatMessage from './../components/ChatMessage';
 
 function mapStateToProps(state) {
     return {
@@ -28,13 +29,14 @@ class MessageList extends Component {
     render() {
         
         const messageItems = this.props.messages 
-        ? this.props.messages.map((message) => <li key={message.message}>{message.user} : {message.message}</li>) 
-        : <li> No messages</li>;
+        ? this.props.messages.map((message) => 
+            <ChatMessage key={message.message} message={message} />
+        ) 
+        : <div> No messages</div>;
 
         return (
             <div>
-                Message List
-               <ul> {messageItems} </ul>
+               <div> {messageItems} </div>
             </div>
         );
     }
